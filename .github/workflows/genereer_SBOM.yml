@@ -3,7 +3,7 @@ name: Generate CycloneDX SBOM
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -25,19 +25,10 @@ jobs:
         run: cyclonedx-bom -o sbom.xml
 
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v3
-
-
-
-
-
-
-
-
-
-
-
-
+        uses: actions/upload-artifact@v4  # Gebruik de nieuwste versie!
+        with:
+          name: sbom
+          path: sbom.xml
 
 
 
