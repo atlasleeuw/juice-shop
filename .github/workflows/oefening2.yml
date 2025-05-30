@@ -1,0 +1,25 @@
+name: Generate CycloneDX SBOM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate SBOM
+        uses: CycloneDX/gh-action-generate-sbom@v1
+        with:
+          output: sbom.xml
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.xml
